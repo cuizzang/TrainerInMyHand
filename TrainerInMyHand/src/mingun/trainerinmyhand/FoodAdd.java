@@ -44,6 +44,7 @@ public class FoodAdd extends Activity implements OnClickListener, AdapterView.On
 
 	@Override
 	public void onClick(View v) {
+		InputDialog.strForInput="음식의 칼로리를 입력하세요.";
 		inputDial=new InputDialog(FoodAdd.this);
 		
 		inputDial.setOnDismissListener(new OnDismissListener(){
@@ -62,6 +63,9 @@ public class FoodAdd extends Activity implements OnClickListener, AdapterView.On
 					Toast.makeText(FoodAdd.this, "숫자만 입력해 주세요!", Toast.LENGTH_SHORT).show();
 					return;
 				}
+				
+				FoodInput.food.add(edtFood.getText().toString());
+				FoodInput.cal.add(numInput);
 			}
 		});
 		

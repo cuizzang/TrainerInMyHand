@@ -25,7 +25,7 @@ public class FoodInput extends Activity implements OnItemSelectedListener,OnClic
 	int selected;
 	int foodcount;
 	public static ArrayList<String> food=new ArrayList();
-	public static ArrayList<Float> cal=new ArrayList();
+	public static ArrayList<Integer> cal=new ArrayList();
 	public static ArrayList<String> ifood=new ArrayList();
 	public static ArrayList<Integer> iamount=new ArrayList();
 	
@@ -45,7 +45,7 @@ public class FoodInput extends Activity implements OnItemSelectedListener,OnClic
 		foodcount=pref.getInt("foodCount", 0);
 		for(int i=0;i<foodcount;i++){
 			food.add(pref.getString("food"+i, ""));
-			cal.add(pref.getFloat("cal"+i, 0));
+			cal.add(pref.getInt("cal"+i, 0));
 		}
 		ArrayAdapter aa=new ArrayAdapter(this, android.R.layout.simple_spinner_item, food);
 		spnFood.setAdapter(aa);
