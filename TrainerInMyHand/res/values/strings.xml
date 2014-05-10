@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TrainerInMyHand</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_planning">Planning</string>
+    <string name="title_activity_food_input">FoodInput</string>
+
+    <color name="text_color">#31D1F1</color>
+    <color name="white">#ffffff</color>
+
+    <string name="open">Open</string>
+    <string name="title_activity_food_add">FoodAdd</string>
+    <string name="hello_world">Hello world!</string>
+
+</resources>
