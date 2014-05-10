@@ -33,7 +33,7 @@ public class FoodInput extends Activity implements OnItemSelectedListener,OnClic
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_food_input);
+		setContentView(R.layout.food_input);
 		edtFood=(EditText)findViewById(R.id.edtFood);
 		spnFood=(Spinner)findViewById(R.id.spnFood);
 		btnFood=(Button)findViewById(R.id.btnFoodIn);
@@ -54,21 +54,18 @@ public class FoodInput extends Activity implements OnItemSelectedListener,OnClic
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.food_input, menu);
 		return true;
 	}
 
 	@Override
-	public void onItemSelected(AdapterView<?> a, View v, int pos,
-			long arg3) {
-			//selected=pos;
+	public void onItemSelected(AdapterView<?> av, View v, int pos, long resId) {
+			selected=pos;
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

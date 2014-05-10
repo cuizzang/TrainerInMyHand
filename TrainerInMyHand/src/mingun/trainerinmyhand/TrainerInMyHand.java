@@ -40,6 +40,9 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 		gvCal=(GridView)findViewById(R.id.gvCalendar);
 	}
 	
+	/**
+	 * 초기화 작업
+	 */
 	private void init(){
 		SharedPreferences pref=getSharedPreferences("TrainerInMyHand", MODE_PRIVATE);
 
@@ -59,7 +62,6 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.trainer_in_my_hand, menu);
 		return true;
 	}
