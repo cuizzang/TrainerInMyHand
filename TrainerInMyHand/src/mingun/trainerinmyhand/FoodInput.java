@@ -62,7 +62,7 @@ public class FoodInput extends Activity implements OnItemSelectedListener,OnClic
 	@Override
 	public void onItemSelected(AdapterView<?> a, View v, int pos,
 			long arg3) {
-			selected=pos;
+			//selected=pos;
 	}
 
 	@Override
