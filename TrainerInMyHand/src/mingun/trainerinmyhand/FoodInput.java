@@ -77,7 +77,8 @@ public class FoodInput extends Activity implements OnItemSelectedListener,OnClic
 			iamount.add(Integer.valueOf(edtFood.getText().toString()));
 		}
 		else if(btn==btnFoodAdd){
-			Intent intent=new Intent();
+			Intent intent=new Intent(FoodInput.this,FoodAdd.class);
+			startActivity(intent);
 		}
 	}
 

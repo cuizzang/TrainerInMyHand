@@ -69,12 +69,11 @@ public class FoodAdd extends Activity implements OnClickListener, AdapterView.On
 			}
 		});
 		
-		
+		inputDial.show();
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
 		//
 	}
-
 }
