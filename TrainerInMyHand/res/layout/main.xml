@@ -17,15 +17,17 @@
 
         <Button
             android:id="@+id/btnPrevMonth"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_weight="1"
+            android:text="지난 달" />
 
         <Button
             android:id="@+id/btnNextMonth"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_weight="1"
+            android:text="이번 달" />
 
     </LinearLayout>
 
@@ -46,7 +48,7 @@
         android:layout_height="100dp"
         android:layout_weight="3"
         android:orientation="vertical"
-        android:padding="10dp" >
+        android:padding="5dp" >
 
         <TextView
             android:id="@+id/txtEat"

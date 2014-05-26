@@ -79,18 +79,18 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 		int weekNum;
 		
 		//이번달 시작일의 요일
-		weekNum=cal.get(Calendar.DAY_OF_WEEK);
+		weekNum = cal.get(Calendar.DAY_OF_WEEK);
 		// 이번달 마지막날
-		thisMonthLastDay=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		thisMonthLastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		// 지난달로 세팅
 		cal.add(Calendar.MONTH, -1);
 		//지난달 마지막날
-		lastMonthLastDay=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		lastMonthLastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		//다시 이번달로
 		cal.add(Calendar.MONTH, 1);
 		
-		if(weekNum==SUN) weekNum+=7;
-		lastMonthLastDay-=weekNum-2;
+		if(weekNum==SUN) weekNum += 7;
+		lastMonthLastDay -= weekNum-2;
 		
 		//년월표시
 		txtCalTitle.setText(thisMonthCal.get(Calendar.YEAR) + "년 " + (thisMonthCal.get(Calendar.MONTH)+1) + "월");
@@ -98,6 +98,7 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 		// 달력에 날짜 세팅
 		DayInfo day;
 		
+
 		for(int i=0;i<weekNum-1;i++){
 			int date=lastMonthLastDay+i;
 			day=new DayInfo();
@@ -121,8 +122,8 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 		}
 		
 		// 어댑터 설정
-		calAdapter=new CalendarAdapter(this,R.layout.day,dayData);
-		gvCal.setAdapter(calAdapter);
+		//calAdapter=new CalendarAdapter(this, R.layout.day, dayData);
+		//gvCal.setAdapter(calAdapter);
 	}
 	
 	/**
@@ -154,6 +155,16 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		Button btn=(Button)v;
+		/*
+		if(btn==btnPrevMonth){
+			thisMonthCal.add(Calendar.MONTH, -1);
+			getCal(thisMonthCal);
+		}
+		else if(btn==btnNextMonth){
+			thisMonthCal.add(Calendar.MONTH, 1);
+			getCal(thisMonthCal);
+		}
+		else*/
 		if(btn==btnPlan){
 			Intent intent=new Intent(TrainerInMyHand.this,Planning.class);
 			startActivity(intent);
@@ -162,6 +173,7 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 			Intent intent=new Intent(TrainerInMyHand.this,FoodInput.class);
 			startActivity(intent);
 		}
+		
 	}
 
 }
