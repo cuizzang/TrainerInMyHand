@@ -17,17 +17,17 @@ import android.widget.TextView;
 
 public class TrainerInMyHand extends Activity implements OnClickListener{
 	
-	public static int nowEat,planEat,nowExe,planExe,moreExe,weight,age,tall,base;
-	private Button btnPlan,btnEat,btnExe,btnSet;
-	private Button btnPrevMonth,btnNextMonth;
-	private TextView txtEat,txtExe;
+	public static int nowEat, planEat, nowExe, planExe, moreExe, weight, age, tall, base;
+	private Button btnPlan, btnEat, btnExe, btnSet;
+	private Button btnPrevMonth, btnNextMonth;
+	private TextView txtEat, txtExe;
 	private TextView txtCalTitle;
 	
-	private boolean exeOver,male;
+	private boolean exeOver, male;
 	
-	private Calendar prevMonthCal,thisMonthCal,nextMonthCal;
+	private Calendar prevMonthCal, thisMonthCal, nextMonthCal;
 	private ArrayList<DayInfo> dayData;
-	private CalendarAdapter calAdapter;
+	private CalendarAdapter2 calAdapter;
 	private GridView gvCal;
 	
 	public static final int SUN = 1;
@@ -45,30 +45,30 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 		
 		init();
 		
-		btnPlan=(Button)findViewById(R.id.btnPlan);
-		btnPlan.setOnClickListener(this);
-		btnEat=(Button)findViewById(R.id.btnEat);
-		btnEat.setOnClickListener(this);
-		btnExe=(Button)findViewById(R.id.btnExersice);
-		btnExe.setOnClickListener(this);
-		btnSet=(Button)findViewById(R.id.btnSetting);
-		btnSet.setOnClickListener(this);
-		btnPrevMonth=(Button)findViewById(R.id.btnPrevMonth);
-		btnPrevMonth.setOnClickListener(this);
-		btnNextMonth=(Button)findViewById(R.id.btnNextMonth);
-		btnNextMonth.setOnClickListener(this);
-		txtEat=(TextView)findViewById(R.id.txtEat);
-		txtExe=(TextView)findViewById(R.id.txtExersice);
-		txtCalTitle=(TextView)findViewById(R.id.txtCalTitle);
+		dayData = new ArrayList<DayInfo>();
+		gvCal = (GridView)findViewById(R.id.gvCalendar);
 		
-		gvCal=(GridView)findViewById(R.id.gvCalendar);
-		dayData=new ArrayList<DayInfo>();
+		btnPlan = (Button)findViewById(R.id.btnPlan);
+		btnPlan.setOnClickListener(this);
+		btnEat = (Button)findViewById(R.id.btnEat);
+		btnEat.setOnClickListener(this);
+		btnExe = (Button)findViewById(R.id.btnExersice);
+		btnExe.setOnClickListener(this);
+		btnSet = (Button)findViewById(R.id.btnSetting);
+		btnSet.setOnClickListener(this);
+		btnPrevMonth = (Button)findViewById(R.id.btnPrevMonth);
+		btnPrevMonth.setOnClickListener(this);
+		btnNextMonth = (Button)findViewById(R.id.btnNextMonth);
+		btnNextMonth.setOnClickListener(this);
+		txtEat = (TextView)findViewById(R.id.txtEat);
+		txtExe = (TextView)findViewById(R.id.txtExersice);
+		txtCalTitle = (TextView)findViewById(R.id.txtCalTitle);
 	}
 	
 	@Override
 	public void onResume(){
 		super.onResume();
-		thisMonthCal=Calendar.getInstance();
+		thisMonthCal = Calendar.getInstance();
 		thisMonthCal.set(Calendar.DAY_OF_MONTH, 1);
 		getCal(thisMonthCal);
 	}
@@ -95,55 +95,55 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 		//년월표시
 		txtCalTitle.setText(thisMonthCal.get(Calendar.YEAR) + "년 " + (thisMonthCal.get(Calendar.MONTH)+1) + "월");
 		
+		/*
 		// 달력에 날짜 세팅
 		DayInfo day;
-		
-
-		for(int i=0;i<weekNum-1;i++){
-			int date=lastMonthLastDay+i;
-			day=new DayInfo();
+		for (int i=0; i<weekNum-1; i++) {
+			int date = lastMonthLastDay+i;
+			day = new DayInfo();
 			day.setDay(String.valueOf(date));
 			day.setDayInMon(false);
 			dayData.add(day);
 		}
 		
-		for(int i=1;i<=thisMonthLastDay;i++){
-			day=new DayInfo();
+		for (int i=1; i<=thisMonthLastDay; i++) {
+			day = new DayInfo();
 			day.setDay(String.valueOf(i));
 			day.setDayInMon(true);
 			dayData.add(day);
 		}
 		
-		for(int i=1;i<=42-(thisMonthLastDay+weekNum-1)+1;i++){
+		for(int i=1; i<=42-(thisMonthLastDay+weekNum-1)+1; i++){
 			day=new DayInfo();
 			day.setDay(String.valueOf(i));
 			day.setDayInMon(false);
 			dayData.add(day);
 		}
+		*/
 		
 		// 어댑터 설정
-		//calAdapter=new CalendarAdapter(this, R.layout.day, dayData);
-		//gvCal.setAdapter(calAdapter);
+		calAdapter = new CalendarAdapter2(TrainerInMyHand.this, cal.MONTH+1, cal.YEAR, getResources().getDisplayMetrics());
+		gvCal.setAdapter(calAdapter);
 	}
 	
 	/**
 	 * 초기화 작업
 	 */
 	private void init(){
-		SharedPreferences pref=getSharedPreferences("TrainerInMyHand", MODE_PRIVATE);
+		SharedPreferences pref = getSharedPreferences("TrainerInMyHand", MODE_PRIVATE);
 
-		nowEat=pref.getInt("nowEat", 0);
-		nowExe=pref.getInt("nowExe", 0);
-		planEat=pref.getInt("planEat", 0);
-		planExe=pref.getInt("planExe", 0);
-		moreExe=nowExe-planExe;
-		if(moreExe<0) moreExe=0;
-		base=pref.getInt("base", 0);
-		tall=pref.getInt("tall", 0);
-		age=pref.getInt("age", 0);
-		weight=pref.getInt("weight", 0);
-		exeOver=pref.getBoolean("exeOver", false);
-		male=pref.getBoolean("male", false);
+		nowEat = pref.getInt("nowEat", 0);
+		nowExe = pref.getInt("nowExe", 0);
+		planEat = pref.getInt("planEat", 0);
+		planExe = pref.getInt("planExe", 0);
+		moreExe = nowExe-planExe;
+		if(moreExe<0) moreExe = 0;
+		base = pref.getInt("base", 0);
+		tall = pref.getInt("tall", 0);
+		age = pref.getInt("age", 0);
+		weight = pref.getInt("weight", 0);
+		exeOver = pref.getBoolean("exeOver", false);
+		male = pref.getBoolean("male", false);
 	}
 
 	@Override
@@ -154,8 +154,8 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-		Button btn=(Button)v;
-		/*
+		Button btn = (Button)v;
+
 		if(btn==btnPrevMonth){
 			thisMonthCal.add(Calendar.MONTH, -1);
 			getCal(thisMonthCal);
@@ -164,13 +164,12 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 			thisMonthCal.add(Calendar.MONTH, 1);
 			getCal(thisMonthCal);
 		}
-		else*/
-		if(btn==btnPlan){
-			Intent intent=new Intent(TrainerInMyHand.this,Planning.class);
+		else if(btn==btnPlan){
+			Intent intent = new Intent(TrainerInMyHand.this,Planning.class);
 			startActivity(intent);
 		}
 		else if(btn==btnEat){
-			Intent intent=new Intent(TrainerInMyHand.this,FoodInput.class);
+			Intent intent = new Intent(TrainerInMyHand.this,FoodInput.class);
 			startActivity(intent);
 		}
 		

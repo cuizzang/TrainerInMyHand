@@ -12,17 +12,17 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CalendarAdapter extends BaseAdapter{
+public class CalendarAdapter extends BaseAdapter {
 	private ArrayList<DayInfo> data;
 	private Context context;
 	private int res;
 	private LayoutInflater li;
 	
-	public CalendarAdapter(Context context,int res,ArrayList<DayInfo> data){
-		this.data=data;
-		this.context=context;
-		this.res=res;
-		li=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	public CalendarAdapter(Context context, int res, ArrayList<DayInfo> data){
+		this.data = data;
+		this.context = context;
+		this.res = res;
+		li = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	@Override
@@ -42,18 +42,18 @@ public class CalendarAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(int pos, View v, ViewGroup group) {
-		DayInfo dinfo=data.get(pos);
+		DayInfo dinfo = data.get(pos);
 		DayViewHolder holder;
 		
 		if(v==null){
-			v=li.inflate(res, null);
-			holder=new DayViewHolder();
-			holder.ll=(LinearLayout)v.findViewById(R.id.llDay);
-			holder.tv=(TextView)v.findViewById(R.id.tvDay);
+			v = li.inflate(res, null);
+			holder = new DayViewHolder();
+			holder.ll = (LinearLayout)v.findViewById(R.id.llDay);
+			holder.tv = (TextView)v.findViewById(R.id.tvDay);
 			v.setTag(holder);
 		}
 		else{
-			holder=(DayViewHolder)v.getTag();
+			holder = (DayViewHolder)v.getTag();
 		}
 		
 		if(dinfo!=null){
