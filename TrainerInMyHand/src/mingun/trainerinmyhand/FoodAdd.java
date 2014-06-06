@@ -3,11 +3,14 @@ package mingun.trainerinmyhand;
 import mingun.trainerinmyhand.util.InputDialog;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +24,8 @@ public class FoodAdd extends Activity implements OnClickListener, AdapterView.On
 	ListView lvFood;
 	InputDialog inputDial;
 	String strInput;
-
+	ArrayAdapter aaFoodAdd;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,7 +36,7 @@ public class FoodAdd extends Activity implements OnClickListener, AdapterView.On
 		lvFood=(ListView)findViewById(R.id.lvFoodList);
 		btnFood.setOnClickListener(this);
 		
-		ArrayAdapter aaFoodAdd=new ArrayAdapter(this, android.R.layout.simple_list_item_1, FoodInput.food);
+		aaFoodAdd=new ArrayAdapter(this, android.R.layout.simple_list_item_1, FoodInput.food);
 		lvFood.setAdapter(aaFoodAdd);
 	}
 
@@ -46,6 +50,10 @@ public class FoodAdd extends Activity implements OnClickListener, AdapterView.On
 	public void onClick(View v) {
 		InputDialog.strForInput="음식의 칼로리를 입력하세요.";
 		inputDial=new InputDialog(FoodAdd.this);
+		
+		Context mContext = getApplicationContext();
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+        View layout = inflater.inflate(R.layout.input_dialog,(ViewGroup) findViewById(R.id.llInput));
 		
 		inputDial.setOnDismissListener(new OnDismissListener(){
 			@Override
@@ -70,6 +78,7 @@ public class FoodAdd extends Activity implements OnClickListener, AdapterView.On
 		});
 		
 		inputDial.show();
+		aaFoodAdd.notifyDataSetChanged();
 	}
 
 	@Override

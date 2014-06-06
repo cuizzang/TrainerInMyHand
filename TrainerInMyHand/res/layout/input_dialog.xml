@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout 
+    android:id="@+id/llInput"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,12 +11,19 @@
         android:id="@+id/edtInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btnInput"
         android:layout_alignParentLeft="true"
-        android:ems="10" >
+        android:layout_below="@+id/txtInput"
+        android:layout_marginLeft="15dp"
+        android:ems="10" />
 
-        <requestFocus />
-    </EditText>
+    <Button
+        android:id="@+id/btnInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtInput"
+        android:layout_below="@+id/edtInput"
+        android:layout_marginLeft="28dp"
+        android:text="확인" />
 
     <TextView
         android:id="@+id/txtInput"
@@ -23,16 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/edtInput"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginRight="41dp"
+        android:layout_marginTop="30dp"
         android:text="수치를 입력하십시오" />
-
-    <Button
-        android:id="@+id/btnInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtInput"
-        android:layout_toRightOf="@+id/edtInput"
-        android:text="확인" />
 
 </RelativeLayout>

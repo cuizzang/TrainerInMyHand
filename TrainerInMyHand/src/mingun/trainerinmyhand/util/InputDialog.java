@@ -38,5 +38,6 @@ public class InputDialog extends Dialog implements View.OnClickListener{
 	@Override
 	public void onClick(View v) {
 		msgInput=edtInput.getText().toString();
+		this.dismiss();
 	}
 }

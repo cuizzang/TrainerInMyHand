@@ -122,7 +122,7 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 		*/
 		
 		// ¾î´ðÅÍ ¼³Á¤
-		calAdapter = new CalendarAdapter2(TrainerInMyHand.this, cal.MONTH+1, cal.YEAR, getResources().getDisplayMetrics());
+		calAdapter = new CalendarAdapter2(TrainerInMyHand.this, thisMonthCal.get(Calendar.MONTH), cal.YEAR, getResources().getDisplayMetrics());
 		gvCal.setAdapter(calAdapter);
 	}
 	
@@ -161,7 +161,7 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 			getCal(thisMonthCal);
 		}
 		else if(btn==btnNextMonth){
-			thisMonthCal.add(Calendar.MONTH, 1);
+			thisMonthCal.add(Calendar.MONTH, +1);
 			getCal(thisMonthCal);
 		}
 		else if(btn==btnPlan){
