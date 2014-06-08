@@ -26,13 +26,11 @@ class CalendarAdapter2 extends BaseAdapter {
 	private int mDaysLastMonth;
 	private int mDaysNextMonth;
 	private int mTitleHeight, mDayHeight;
-	private final String[] mDays = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+	private final String[] mDays = { "일","월", "화", "수", "목", "금", "토" };
 	private int[] mDaysInMonth  = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };;
 	
 	public CalendarAdapter2(Context c, int month, int year, DisplayMetrics metrics) {
-		if(year%4==0 && (year%100!=0 || year%400==0)){
-			mDaysInMonth[1]=29;
-		}
+		if(year%4==0 && (year%100!=0 || year%400==0)) mDaysInMonth[1] = 29;
 		else mDaysInMonth[1]=28;
 		mContext = c;
 		mMonth = month;
@@ -56,8 +54,8 @@ class CalendarAdapter2 extends BaseAdapter {
 			prevDay = daysInMonth(mMonth) - firstDay+1;
 		else
 			prevDay = daysInMonth(mMonth - 1) - firstDay+1;
-		for (int i = 0; i < firstDay-2; i++) {
-			mItems.add(String.valueOf(prevDay + i+2));
+		for (int i = 0; i < firstDay+1; i++) {
+			mItems.add(String.valueOf(prevDay + i-1));
 			mDaysLastMonth++;
 			mDaysShown++;
 		} 

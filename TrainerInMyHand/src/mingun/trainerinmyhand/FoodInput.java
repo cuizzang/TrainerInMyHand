@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class FoodInput extends Activity implements OnItemSelectedListener,OnClickListener{
 
@@ -23,11 +24,12 @@ public class FoodInput extends Activity implements OnItemSelectedListener,OnClic
 	Spinner spnFood;
 	Button btnFood,btnFoodAdd;
 	int selected;
-	int foodcount;
-	public static ArrayList<String> food=new ArrayList();
-	public static ArrayList<Integer> cal=new ArrayList();
-	public static ArrayList<String> ifood=new ArrayList();
-	public static ArrayList<Integer> iamount=new ArrayList();
+	public static int foodcount;
+	public static ArrayList<String> food=new ArrayList<String>();
+	public static ArrayList<Integer> cal=new ArrayList<Integer>();
+	public static ArrayList<String> ifood=new ArrayList<String>();
+	public static ArrayList<Integer> iamount=new ArrayList<Integer>();
+	public static ArrayList<String> listForShow=new ArrayList<String>();
 	
 	
 	@Override
@@ -46,8 +48,9 @@ public class FoodInput extends Activity implements OnItemSelectedListener,OnClic
 		for(int i=0;i<foodcount;i++){
 			food.add(pref.getString("food"+i, ""));
 			cal.add(pref.getInt("cal"+i, 0));
+			listForShow.add(food.get(i) + " " + String.valueOf(cal.get(i)));
 		}
-		ArrayAdapter aa=new ArrayAdapter(this, android.R.layout.simple_spinner_item, food);
+		ArrayAdapter<String> aa=new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listForShow);
 		spnFood.setAdapter(aa);
 		spnFood.setOnItemSelectedListener(this);
 	}
@@ -72,14 +75,19 @@ public class FoodInput extends Activity implements OnItemSelectedListener,OnClic
 	public void onClick(View v) {
 		Button btn=(Button)v;
 		if(btn==btnFood){
-			TrainerInMyHand.nowEat+=cal.get(selected)*Integer.valueOf(edtFood.getText().toString());
-			ifood.add(food.get(selected).toString());
-			iamount.add(Integer.valueOf(edtFood.getText().toString()));
+			try{
+				TrainerInMyHand.nowEat+=cal.get(selected)*Integer.valueOf(edtFood.getText().toString());
+				ifood.add(food.get(selected).toString());
+				iamount.add(Integer.valueOf(edtFood.getText().toString()));
+				Toast.makeText(FoodInput.this, "입력되었습니다.", Toast.LENGTH_SHORT).show();
+			}
+			catch(Exception e){
+				Toast.makeText(FoodInput.this, "숫자만 입력해 주세요.", Toast.LENGTH_SHORT).show();
+			}
 		}
 		else if(btn==btnFoodAdd){
 			Intent intent=new Intent(FoodInput.this,FoodAdd.class);
 			startActivity(intent);
 		}
 	}
-
 }

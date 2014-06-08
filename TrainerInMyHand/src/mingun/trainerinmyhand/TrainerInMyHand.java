@@ -45,6 +45,8 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 		
 		init();
 		
+		nowEat=700;
+		planEat=2000;
 		dayData = new ArrayList<DayInfo>();
 		gvCal = (GridView)findViewById(R.id.gvCalendar);
 		
@@ -68,6 +70,7 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 	@Override
 	public void onResume(){
 		super.onResume();
+		txtEat.setText("³²Àº Ä®·Î¸®:"+ (planEat-nowEat) +"/"+planEat+"Kcal");
 		thisMonthCal = Calendar.getInstance();
 		thisMonthCal.set(Calendar.DAY_OF_MONTH, 1);
 		getCal(thisMonthCal);
@@ -122,7 +125,12 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 		*/
 		
 		// ¾î´ðÅÍ ¼³Á¤
-		calAdapter = new CalendarAdapter2(TrainerInMyHand.this, thisMonthCal.get(Calendar.MONTH), cal.YEAR, getResources().getDisplayMetrics());
+		calAdapter = new CalendarAdapter2(
+			TrainerInMyHand.this, 
+			thisMonthCal.get(Calendar.MONTH), 
+			thisMonthCal.get(Calendar.YEAR),
+			getResources().getDisplayMetrics()
+		);
 		gvCal.setAdapter(calAdapter);
 	}
 	

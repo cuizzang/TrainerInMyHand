@@ -27,13 +27,19 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="추가" />
-
     </LinearLayout>
 
     <ListView
         android:id="@+id/lvFoodList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.10" >
     </ListView>
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="뒤로가기" />
 
 </LinearLayout>
