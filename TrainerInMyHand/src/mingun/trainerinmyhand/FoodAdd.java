@@ -86,9 +86,9 @@ public class FoodAdd extends Activity implements OnClickListener, AdapterView.On
 						Toast.makeText(FoodAdd.this, "입력내용이 없습니다.", Toast.LENGTH_SHORT).show();
 						return;
 					}
-					int numInput;
+					float numInput;
 					try{
-						numInput=Integer.valueOf(strInput);
+						numInput=Float.valueOf(strInput);
 					}
 					catch(Exception e){
 						Toast.makeText(FoodAdd.this, "숫자만 입력해 주세요!", Toast.LENGTH_SHORT).show();
@@ -99,11 +99,11 @@ public class FoodAdd extends Activity implements OnClickListener, AdapterView.On
 					Toast.makeText(FoodAdd.this, "추가 완료", Toast.LENGTH_SHORT).show();
 					FoodInput.food.add(edtFood.getText().toString());
 					FoodInput.cal.add(numInput);
-					FoodInput.listForShow.add(FoodInput.food.get(FoodInput.food.size()-1) + " " + String.valueOf(FoodInput.cal.get(FoodInput.cal.size()-1)));
+					FoodInput.listForShow.add(FoodInput.food.get(FoodInput.food.size()-1) + " " + String.valueOf(FoodInput.cal.get(FoodInput.cal.size()-1))+"kcal");
 					
 					
 					editor.putString("food"+(FoodInput.food.size()-1), FoodInput.food.get(FoodInput.food.size()-1));
-					editor.putInt("cal"+(FoodInput.cal.size()-1), FoodInput.cal.get(FoodInput.cal.size()-1));
+					editor.putFloat("cal"+(FoodInput.cal.size()-1), FoodInput.cal.get(FoodInput.cal.size()-1));
 					aaFoodAdd.notifyDataSetChanged();
 				}
 			});

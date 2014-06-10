@@ -12,5 +12,6 @@
     <string name="open">Open</string>
     <string name="title_activity_food_add">FoodAdd</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_setting">Setting</string>
 
 </resources>

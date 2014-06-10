@@ -5,6 +5,8 @@ import java.util.Set;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
@@ -26,9 +28,9 @@ public class FoodInput extends Activity implements OnItemSelectedListener,OnClic
 	int selected;
 	public static int foodcount;
 	public static ArrayList<String> food=new ArrayList<String>();
-	public static ArrayList<Integer> cal=new ArrayList<Integer>();
+	public static ArrayList<Float> cal=new ArrayList<Float>();
 	public static ArrayList<String> ifood=new ArrayList<String>();
-	public static ArrayList<Integer> iamount=new ArrayList<Integer>();
+	public static ArrayList<Float> iamount=new ArrayList<Float>();
 	public static ArrayList<String> listForShow=new ArrayList<String>();
 	
 	
@@ -45,10 +47,13 @@ public class FoodInput extends Activity implements OnItemSelectedListener,OnClic
 		
 		SharedPreferences pref=getSharedPreferences("TrainerInMyHand", MODE_PRIVATE);
 		foodcount=pref.getInt("foodCount", 0);
+		food.clear();
+		cal.clear();
+		listForShow.clear();
 		for(int i=0;i<foodcount;i++){
 			food.add(pref.getString("food"+i, ""));
-			cal.add(pref.getInt("cal"+i, 0));
-			listForShow.add(food.get(i) + " " + String.valueOf(cal.get(i)));
+			cal.add(pref.getFloat("cal"+i, 0));
+			listForShow.add(food.get(i) + " " + String.valueOf(cal.get(i))+"kcal");
 		}
 		ArrayAdapter<String> aa=new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listForShow);
 		spnFood.setAdapter(aa);
@@ -75,15 +80,25 @@ public class FoodInput extends Activity implements OnItemSelectedListener,OnClic
 	public void onClick(View v) {
 		Button btn=(Button)v;
 		if(btn==btnFood){
-			try{
-				TrainerInMyHand.nowEat+=cal.get(selected)*Integer.valueOf(edtFood.getText().toString());
-				ifood.add(food.get(selected).toString());
-				iamount.add(Integer.valueOf(edtFood.getText().toString()));
-				Toast.makeText(FoodInput.this, "입력되었습니다.", Toast.LENGTH_SHORT).show();
-			}
-			catch(Exception e){
-				Toast.makeText(FoodInput.this, "숫자만 입력해 주세요.", Toast.LENGTH_SHORT).show();
-			}
+			new AlertDialog.Builder(FoodInput.this).setMessage("입력하시겠습니까?")
+			.setPositiveButton("예", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					try{
+						TrainerInMyHand.nowEat+=cal.get(selected)*Integer.valueOf(edtFood.getText().toString());
+						ifood.add(food.get(selected).toString());
+						iamount.add(Float.valueOf(edtFood.getText().toString()));
+						Toast.makeText(FoodInput.this, "입력되었습니다.", Toast.LENGTH_SHORT).show();
+					}
+					catch(Exception e){
+						Toast.makeText(FoodInput.this, "숫자만 입력해 주세요.", Toast.LENGTH_SHORT).show();
+					}
+				}
+			})
+			.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {}
+			}).show();
 		}
 		else if(btn==btnFoodAdd){
 			Intent intent=new Intent(FoodInput.this,FoodAdd.class);

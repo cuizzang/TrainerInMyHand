@@ -17,13 +17,13 @@ import android.widget.TextView;
 
 public class TrainerInMyHand extends Activity implements OnClickListener{
 	
-	public static int nowEat, planEat, nowExe, planExe, moreExe, weight, age, tall, base;
+	public static float nowEat, planEat, nowExe, planExe, moreExe, weight, age, height, base;
 	private Button btnPlan, btnEat, btnExe, btnSet;
 	private Button btnPrevMonth, btnNextMonth;
 	private TextView txtEat, txtExe;
 	private TextView txtCalTitle;
 	
-	private boolean exeOver, male;
+	public static boolean exeOver, male;
 	
 	private Calendar prevMonthCal, thisMonthCal, nextMonthCal;
 	private ArrayList<DayInfo> dayData;
@@ -45,8 +45,6 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 		
 		init();
 		
-		nowEat=700;
-		planEat=2000;
 		dayData = new ArrayList<DayInfo>();
 		gvCal = (GridView)findViewById(R.id.gvCalendar);
 		
@@ -71,6 +69,7 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 	public void onResume(){
 		super.onResume();
 		txtEat.setText("남은 칼로리:"+ (planEat-nowEat) +"/"+planEat+"Kcal");
+		txtExe.setText("남은 운동량:"+(planExe-nowExe)+"/"+planExe+"Kcal");
 		thisMonthCal = Calendar.getInstance();
 		thisMonthCal.set(Calendar.DAY_OF_MONTH, 1);
 		getCal(thisMonthCal);
@@ -140,18 +139,25 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 	private void init(){
 		SharedPreferences pref = getSharedPreferences("TrainerInMyHand", MODE_PRIVATE);
 
-		nowEat = pref.getInt("nowEat", 0);
-		nowExe = pref.getInt("nowExe", 0);
-		planEat = pref.getInt("planEat", 0);
-		planExe = pref.getInt("planExe", 0);
+		nowEat = pref.getFloat("nowEat", 0);
+		nowExe = pref.getFloat("nowExe", 0);
+		planEat = pref.getFloat("planEat", 0);
+		planExe = pref.getFloat("planExe", 0);
 		moreExe = nowExe-planExe;
-		if(moreExe<0) moreExe = 0;
-		base = pref.getInt("base", 0);
-		tall = pref.getInt("tall", 0);
-		age = pref.getInt("age", 0);
-		weight = pref.getInt("weight", 0);
+		if(moreExe<0) moreExe = (float) 0;
+		base = pref.getFloat("base", 0);
+		height = pref.getFloat("height", 0);
+		age = pref.getFloat("age", 0);
+		weight = pref.getFloat("weight", 0);
 		exeOver = pref.getBoolean("exeOver", false);
 		male = pref.getBoolean("male", false);
+		boolean flag=true;
+		if(weight==0 && flag){
+			flag=false;
+			Intent intent = new Intent(TrainerInMyHand.this,Setting.class);
+			startActivity(intent);
+			return;
+		}
 	}
 
 	@Override
@@ -173,7 +179,7 @@ public class TrainerInMyHand extends Activity implements OnClickListener{
 			getCal(thisMonthCal);
 		}
 		else if(btn==btnPlan){
-			Intent intent = new Intent(TrainerInMyHand.this,Planning.class);
+			Intent intent = new Intent(TrainerInMyHand.this,Setting.class);
 			startActivity(intent);
 		}
 		else if(btn==btnEat){
